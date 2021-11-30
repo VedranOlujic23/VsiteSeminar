@@ -1,0 +1,9 @@
+C:\Users\VedranO\source\repos\VsiteSeminar\obj\Debug\VsiteSeminar.csprojAssemblyReference.cache
+C:\Users\VedranO\source\repos\VsiteSeminar\obj\Debug\VsiteSeminar.Properties.Resources.resources
+C:\Users\VedranO\source\repos\VsiteSeminar\obj\Debug\VsiteSeminar.csproj.GenerateResource.cache
+C:\Users\VedranO\source\repos\VsiteSeminar\obj\Debug\VsiteSeminar.csproj.CoreCompileInputs.cache
+C:\Users\VedranO\source\repos\VsiteSeminar\bin\Debug\VsiteSeminar.exe.config
+C:\Users\VedranO\source\repos\VsiteSeminar\bin\Debug\VsiteSeminar.exe
+C:\Users\VedranO\source\repos\VsiteSeminar\bin\Debug\VsiteSeminar.pdb
+C:\Users\VedranO\source\repos\VsiteSeminar\obj\Debug\VsiteSeminar.exe
+C:\Users\VedranO\source\repos\VsiteSeminar\obj\Debug\VsiteSeminar.pdb
