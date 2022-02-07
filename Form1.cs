@@ -21,7 +21,6 @@ namespace VsiteSeminar
 
         private void StartPingMeasurement_Click(object sender, EventArgs e)
         {
-            //init ping class
             Ping p = new Ping();
             PingReply r;
             string s;
