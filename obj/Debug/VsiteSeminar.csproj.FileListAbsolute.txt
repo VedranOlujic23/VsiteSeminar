@@ -7,3 +7,4 @@ C:\Users\VedranO\source\repos\VsiteSeminar\bin\Debug\VsiteSeminar.exe
 C:\Users\VedranO\source\repos\VsiteSeminar\bin\Debug\VsiteSeminar.pdb
 C:\Users\VedranO\source\repos\VsiteSeminar\obj\Debug\VsiteSeminar.exe
 C:\Users\VedranO\source\repos\VsiteSeminar\obj\Debug\VsiteSeminar.pdb
+C:\Users\VedranO\source\repos\VsiteSeminar\obj\Debug\VsiteSeminar.Form1.resources
