@@ -15,18 +15,29 @@ namespace VsiteSeminar
 
         private void StartPingMeasurement_Click(object sender, EventArgs e)
         {
-            //string IPAddress;
-            //IPAddress = textBoxIPAdress.Text;
-            var sender1 = sender;
-            var e1 = e;
 
-            if (string.IsNullOrWhiteSpace(textBoxPingPeriod.Text))
-                timer1.Interval = 1000;
-            else
-                timer1.Interval = int.Parse(textBoxPingPeriod.Text) * 1000;
+            try
+            {
+                //string IPAddress;
+                //IPAddress = textBoxIPAdress.Text;
+                var sender1 = sender;
+                var e1 = e;
 
-            timer1.Enabled = true;
-            MeasurePing(sender1, e1);
+                if (string.IsNullOrWhiteSpace(textBoxPingPeriod.Text))
+                    timer1.Interval = 1000;
+                else
+                    timer1.Interval = int.Parse(textBoxPingPeriod.Text) * 1000;
+
+                timer1.Enabled = true;
+                MeasurePing(sender1, e1);
+            }
+            catch (FormatException)
+            {
+                richTextBox1.Text = "Check your Ping period format, it must be a number! Enter a valid ping period and start measurement again";
+                timer1.Enabled = false;
+                textBoxPingPeriod.Text = "1";
+            }
+
 
 
 
@@ -83,10 +94,8 @@ namespace VsiteSeminar
             }
             catch (PingException ex)
             {
-                richTextBox1.Text = "Encountered problem while pinging: " + ex.Message;
+                richTextBox1.Text = ex.Message + "Check your IP Address / URL";
                 timer1.Enabled = false;
-                textBoxIPAdress.Text = "";
-                textBoxPingPeriod.Text = "1";
             }
 
 
