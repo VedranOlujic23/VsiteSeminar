@@ -5,15 +5,15 @@ using System.Windows.Forms;
 namespace VsiteSeminar
 {
 
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
 
-        private void StartPingMeasurement_Click(object sender, EventArgs e)
+        private void buttonStartPingMeasurement_Click(object sender, EventArgs e)
         {
 
             try
@@ -22,19 +22,20 @@ namespace VsiteSeminar
                 //IPAddress = textBoxIPAdress.Text;
                 var sender1 = sender;
                 var e1 = e;
-
+                textBoxIPAddress.Enabled = false;
                 if (string.IsNullOrWhiteSpace(textBoxPingPeriod.Text))
-                    timer1.Interval = 1000;
+                    pingPeriodTimer.Interval = 1000;
                 else
-                    timer1.Interval = int.Parse(textBoxPingPeriod.Text) * 1000;
+                    pingPeriodTimer.Interval = int.Parse(textBoxPingPeriod.Text) * 1000;
 
-                timer1.Enabled = true;
+                pingPeriodTimer.Enabled = true;
                 MeasurePing(sender1, e1);
             }
             catch (FormatException)
             {
-                richTextBox1.Text = "Check your Ping period format, it must be a number! Enter a valid ping period and start measurement again";
-                timer1.Enabled = false;
+                textBoxOutput.Text = "Check your Ping period format, it must be a number! Enter a valid ping period and start measurement again";
+                pingPeriodTimer.Enabled = false;
+                textBoxIPAddress.Enabled = true;
                 textBoxPingPeriod.Text = "1";
             }
 
@@ -45,7 +46,7 @@ namespace VsiteSeminar
 
         private void textBox1_Validated(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBoxIPAdress.Text) || textBoxIPAdress.Text == "")
+            if (string.IsNullOrWhiteSpace(textBoxIPAddress.Text) || textBoxIPAddress.Text == "")
             {
                 MessageBox.Show("Please use valid IP or web address!!");
             }
@@ -80,7 +81,7 @@ namespace VsiteSeminar
                 Ping p = new Ping();
                 PingReply r;
                 string IPAddress;
-                IPAddress = textBoxIPAdress.Text;
+                IPAddress = textBoxIPAddress.Text;
                 string PingPeriod;
                 PingPeriod = textBoxPingPeriod.Text;
 
@@ -88,16 +89,27 @@ namespace VsiteSeminar
 
                 if (r.Status == IPStatus.Success)
                 {
-                    richTextBox1.Text = "Ping to " + IPAddress.ToString() + "[" + r.Address.ToString() + "]" + " Successful"
-                       + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n" + "Ping period (s) = " + (timer1.Interval / 1000).ToString();
+                    textBoxOutput.Text = "Ping to " + IPAddress.ToString() + "[" + r.Address.ToString() + "]" + " Successful"
+                       + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n" + "Ping period (s) = " + (pingPeriodTimer.Interval / 1000).ToString();
                 }
             }
             catch (PingException ex)
             {
-                richTextBox1.Text = ex.Message + "Check your IP Address / URL";
-                timer1.Enabled = false;
+                textBoxOutput.Text = ex.Message + "Check your IP Address / URL";
+                pingPeriodTimer.Enabled = false;
             }
-
+            catch (ArgumentNullException ex)
+            {
+                textBoxOutput.Text = ex.Message + ". Enter a valid URL / IP Address!";
+                pingPeriodTimer.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            
+            
 
 
         }
@@ -109,17 +121,23 @@ namespace VsiteSeminar
            //     timer1.Interval = int.Parse(textBoxPingPeriod.Text) * 1000;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timerPingPeriod_Tick(object sender, EventArgs e)
         {
             var send = sender;
             var eventArgument = e;
             MeasurePing(send, eventArgument);
         }
 
-        private void StopPingMeasurement_click(object sender, EventArgs e)
+        private void buttonStopPingMeasurement_click(object sender, EventArgs e)
         {
-            timer1.Enabled = false;
-            richTextBox1.Text = "Ping measurement stopped!";
+            pingPeriodTimer.Enabled = false;
+            textBoxIPAddress.Enabled = true;
+            textBoxOutput.Text = "Ping measurement stopped! Enter an URL / IP Address and start measurement again!";
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
