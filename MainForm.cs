@@ -18,13 +18,14 @@ namespace VsiteSeminar
 
             try
             {
-                //string IPAddress;
-                //IPAddress = textBoxIPAdress.Text;
                 var sender1 = sender;
                 var e1 = e;
                 textBoxIPAddress.Enabled = false;
                 if (string.IsNullOrWhiteSpace(textBoxPingPeriod.Text))
+                {
                     pingPeriodTimer.Interval = 1000;
+                    textBoxPingPeriod.Text = "1";
+                }
                 else
                     pingPeriodTimer.Interval = int.Parse(textBoxPingPeriod.Text) * 1000;
 
@@ -36,21 +37,19 @@ namespace VsiteSeminar
                 textBoxOutput.Text = "Check your Ping period format, it must be a number! Enter a valid ping period and start measurement again";
                 pingPeriodTimer.Enabled = false;
                 textBoxIPAddress.Enabled = true;
-                textBoxPingPeriod.Text = "1";
             }
-
-
-
-
-        }
-
-        private void textBox1_Validated(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBoxIPAddress.Text) || textBoxIPAddress.Text == "")
+            catch (ArgumentOutOfRangeException)
             {
-                MessageBox.Show("Please use valid IP or web address!!");
+                textBoxOutput.Text = "Check your Ping period format, it must be a number! Enter a valid ping period and start measurement again";
+                pingPeriodTimer.Enabled = false;
+                textBoxIPAddress.Enabled = true;
             }
+
+
+
         }
+
+
 
 
 
@@ -97,11 +96,14 @@ namespace VsiteSeminar
             {
                 textBoxOutput.Text = ex.Message + "Check your IP Address / URL";
                 pingPeriodTimer.Enabled = false;
+                textBoxIPAddress.Enabled = true;
             }
             catch (ArgumentNullException ex)
             {
                 textBoxOutput.Text = ex.Message + ". Enter a valid URL / IP Address!";
                 pingPeriodTimer.Enabled = false;
+                textBoxIPAddress.Enabled = true;
+
             }
             catch (Exception ex)
             {
@@ -116,9 +118,27 @@ namespace VsiteSeminar
 
         private void textBoxPingPeriod_TextChanged(object sender, EventArgs e)
         {
-           // if (textBoxPingPeriod.Text == "")
-                
-           //     timer1.Interval = int.Parse(textBoxPingPeriod.Text) * 1000;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(textBoxPingPeriod.Text))
+                {
+                    pingPeriodTimer.Interval = 1000;
+                }
+                else
+                    pingPeriodTimer.Interval = int.Parse(textBoxPingPeriod.Text) * 1000;
+            }
+            catch (FormatException)
+            {
+                textBoxOutput.Text = "Check your Ping period format, it must be a number! Enter a valid ping period and start measurement again";
+                pingPeriodTimer.Enabled = false;
+                textBoxIPAddress.Enabled = true;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                textBoxOutput.Text = "Check your Ping period format, it must be a number! Enter a valid ping period and start measurement again";
+                pingPeriodTimer.Enabled = false;
+                textBoxIPAddress.Enabled = true;
+            }
         }
 
         private void timerPingPeriod_Tick(object sender, EventArgs e)
