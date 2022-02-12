@@ -67,7 +67,7 @@
             this.textBoxIPAdress.Name = "textBoxIPAdress";
             this.textBoxIPAdress.Size = new System.Drawing.Size(199, 20);
             this.textBoxIPAdress.TabIndex = 2;
-            this.textBoxIPAdress.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBoxIPAdress.TextChanged += new System.EventHandler(this.TextBoxIPAddress_TextChanged);
             // 
             // label2
             // 

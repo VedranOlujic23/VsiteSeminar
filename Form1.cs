@@ -15,11 +15,19 @@ namespace VsiteSeminar
 
         private void StartPingMeasurement_Click(object sender, EventArgs e)
         {
-            string IPAddress;
-            IPAddress = textBoxIPAdress.Text;
-            string PingPeriod;
-            
+            //string IPAddress;
+            //IPAddress = textBoxIPAdress.Text;
+            var sender1 = sender;
+            var e1 = e;
+
+            if (string.IsNullOrWhiteSpace(textBoxPingPeriod.Text))
+                timer1.Interval = 1000;
+            else
+                timer1.Interval = int.Parse(textBoxPingPeriod.Text) * 1000;
+
             timer1.Enabled = true;
+            MeasurePing(sender1, e1);
+
 
 
         }
@@ -44,7 +52,7 @@ namespace VsiteSeminar
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBoxIPAddress_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -56,21 +64,31 @@ namespace VsiteSeminar
 
         private void MeasurePing(object sender, EventArgs e)
         {
-
-            Ping p = new Ping();
-            PingReply r;
-            string IPAddress;
-            IPAddress = textBoxIPAdress.Text;
-            string PingPeriod;
-            PingPeriod = textBoxPingPeriod.Text;
-
-            r = p.Send(IPAddress);
-
-            if (r.Status == IPStatus.Success)
+            try
             {
-                richTextBox1.Text = "Ping to " + IPAddress.ToString() + "[" + r.Address.ToString() + "]" + " Successful"
-                   + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n" + "Ping period (s) = " + (timer1.Interval/1000).ToString() ;
+                Ping p = new Ping();
+                PingReply r;
+                string IPAddress;
+                IPAddress = textBoxIPAdress.Text;
+                string PingPeriod;
+                PingPeriod = textBoxPingPeriod.Text;
+
+                r = p.Send(IPAddress);
+
+                if (r.Status == IPStatus.Success)
+                {
+                    richTextBox1.Text = "Ping to " + IPAddress.ToString() + "[" + r.Address.ToString() + "]" + " Successful"
+                       + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n" + "Ping period (s) = " + (timer1.Interval / 1000).ToString();
+                }
             }
+            catch (PingException ex)
+            {
+                richTextBox1.Text = "Encountered problem while pinging: " + ex.Message;
+                timer1.Enabled = false;
+                textBoxIPAdress.Text = "";
+                textBoxPingPeriod.Text = "1";
+            }
+
 
 
         }
@@ -92,6 +110,7 @@ namespace VsiteSeminar
         private void StopPingMeasurement_click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
+            richTextBox1.Text = "Ping measurement stopped!";
         }
     }
 }
