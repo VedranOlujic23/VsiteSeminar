@@ -1,6 +1,6 @@
 ﻿namespace VsiteSeminar
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,19 +32,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
-            this.textBoxIPAdress = new System.Windows.Forms.TextBox();
+            this.textBoxIPAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPingPeriod = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.textBoxOutput = new System.Windows.Forms.RichTextBox();
+            this.pingPeriodTimer = new System.Windows.Forms.Timer(this.components);
             this.StopPingMeasurement = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(129, 64);
+            this.label1.Location = new System.Drawing.Point(59, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 13);
             this.label1.TabIndex = 0;
@@ -53,26 +54,26 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(266, 167);
+            this.button1.Location = new System.Drawing.Point(179, 139);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(153, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Start ping measurement";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.StartPingMeasurement_Click);
+            this.button1.Click += new System.EventHandler(this.buttonStartPingMeasurement_Click);
             // 
             // textBoxIPAdress
             // 
-            this.textBoxIPAdress.Location = new System.Drawing.Point(243, 64);
-            this.textBoxIPAdress.Name = "textBoxIPAdress";
-            this.textBoxIPAdress.Size = new System.Drawing.Size(199, 20);
-            this.textBoxIPAdress.TabIndex = 2;
-            this.textBoxIPAdress.TextChanged += new System.EventHandler(this.TextBoxIPAddress_TextChanged);
+            this.textBoxIPAddress.Location = new System.Drawing.Point(156, 36);
+            this.textBoxIPAddress.Name = "textBoxIPAdress";
+            this.textBoxIPAddress.Size = new System.Drawing.Size(275, 20);
+            this.textBoxIPAddress.TabIndex = 2;
+            this.textBoxIPAddress.TextChanged += new System.EventHandler(this.TextBoxIPAddress_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(129, 113);
+            this.label2.Location = new System.Drawing.Point(59, 88);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 13);
             this.label2.TabIndex = 3;
@@ -81,48 +82,60 @@
             // 
             // textBoxPingPeriod
             // 
-            this.textBoxPingPeriod.Location = new System.Drawing.Point(243, 113);
+            this.textBoxPingPeriod.Location = new System.Drawing.Point(156, 85);
             this.textBoxPingPeriod.Name = "textBoxPingPeriod";
-            this.textBoxPingPeriod.Size = new System.Drawing.Size(199, 20);
+            this.textBoxPingPeriod.Size = new System.Drawing.Size(275, 20);
             this.textBoxPingPeriod.TabIndex = 5;
             this.textBoxPingPeriod.TextChanged += new System.EventHandler(this.textBoxPingPeriod_TextChanged);
             // 
-            // richTextBox1
+            // OutputTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(288, 249);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(100, 96);
-            this.richTextBox1.TabIndex = 6;
-            this.richTextBox1.Text = "";
+            this.textBoxOutput.Location = new System.Drawing.Point(179, 228);
+            this.textBoxOutput.Name = "OutputTextBox";
+            this.textBoxOutput.Size = new System.Drawing.Size(153, 96);
+            this.textBoxOutput.TabIndex = 6;
+            this.textBoxOutput.Text = "";
             // 
-            // timer1
+            // pingPeriodTimer
             // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.pingPeriodTimer.Interval = 1000;
+            this.pingPeriodTimer.Tick += new System.EventHandler(this.timerPingPeriod_Tick);
             // 
             // StopPingMeasurement
             // 
-            this.StopPingMeasurement.Location = new System.Drawing.Point(266, 206);
+            this.StopPingMeasurement.Location = new System.Drawing.Point(179, 178);
             this.StopPingMeasurement.Name = "StopPingMeasurement";
             this.StopPingMeasurement.Size = new System.Drawing.Size(153, 23);
             this.StopPingMeasurement.TabIndex = 7;
             this.StopPingMeasurement.Text = "Stop ping measurement";
             this.StopPingMeasurement.UseVisualStyleBackColor = true;
-            this.StopPingMeasurement.Click += new System.EventHandler(this.StopPingMeasurement_click);
+            this.StopPingMeasurement.Click += new System.EventHandler(this.buttonStopPingMeasurement_click);
             // 
-            // Form1
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(215, 346);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "Exit";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(463, 390);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.StopPingMeasurement);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.textBoxOutput);
             this.Controls.Add(this.textBoxPingPeriod);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxIPAdress);
+            this.Controls.Add(this.textBoxIPAddress);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Ping App";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -136,12 +149,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBoxIPAdress;
+        private System.Windows.Forms.TextBox textBoxIPAddress;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxPingPeriod;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox textBoxOutput;
+        private System.Windows.Forms.Timer pingPeriodTimer;
         private System.Windows.Forms.Button StopPingMeasurement;
+        private System.Windows.Forms.Button button2;
     }
 }
 
